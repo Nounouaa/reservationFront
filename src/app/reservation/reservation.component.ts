@@ -16,8 +16,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class ReservationComponent {
     searchText!: string;
     tableReservation!: [];
-    apiURL = "http://localhost:8081/reservation";
-    apiURL2 = "http://localhost:8081/client/getReservationByClient";
+    apiURL = "https://reservationchambre-production.up.railway.app/reservation";
+    apiURL2 = "https://reservationchambre-production.up.railway.app/reservation/client/getReservationByClient";
 
    getPdf(text: any) {
     this.http.get(`${this.apiURL2}/` + text).subscribe((data: any) => {

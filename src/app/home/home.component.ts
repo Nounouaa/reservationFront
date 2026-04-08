@@ -10,10 +10,10 @@ import { Router } from "@angular/router";
     styleUrl: "./home.component.scss",
 })
 export class HomeComponent implements OnInit {
-    URLCLIENT: any = "http://localhost:8081/client";
-    URLCOMMANDE: any = "http://localhost:8081/commande";
-    URLPRODUIT: any = "http://localhost:8081/produit";
-    URLSOMME: any = "http://localhost:8081/client/getAllCommande";
+    URLCLIENT: any = "https://reservationchambre-production.up.railway.app/reservation/client";
+    URLCOMMANDE: any = "https://reservationchambre-production.up.railway.app/reservation/commande";
+    URLPRODUIT: any = "https://reservationchambre-production.up.railway.app/reservation/produit";
+    URLSOMME: any = "https://reservationchambre-production.up.railway.app/reservation/client/getAllCommande";
 
     tab_client: any[] = [];
     tab_commande: any[] = [];
