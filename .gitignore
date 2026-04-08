@@ -2,6 +2,8 @@
 node_modules/
 
 # Dossier de build Angular
+/dist/
+/out-tsc/
 
 # Configuration locale
 /.angular/cache/
