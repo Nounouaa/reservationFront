@@ -1,0 +1,37 @@
+# Node modules (toujours à ignorer)
+node_modules/
+
+# Dossier de build Angular
+/dist/
+/out-tsc/
+
+# Configuration locale
+/.angular/cache/
+/.angular/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environnements sensibles (si tu as un fichier env)
+src/environments/environment.prod.ts
+src/environments/environment.ts
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.log
+
+# Tests
+/coverage/

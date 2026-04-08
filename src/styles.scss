@@ -1,0 +1,13 @@
+@import url("assets/w3.css");
+@import url("assets/libraries/css/sweetalert2.min.css");
+@import url("../node_modules/bootstrap/dist/css/bootstrap.css");
+@import url("../node_modules/font-awesome/css/font-awesome.css");
+
+body {
+    background-image: url("/assets/login.jpg");
+    background-position: center;  
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-size: 100% 100%;
+    min-height: 100vh;
+}

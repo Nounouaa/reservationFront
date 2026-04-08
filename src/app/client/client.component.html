@@ -1,0 +1,188 @@
+<!-- NAVIGATION -->
+<nav
+    class="navbar navbar-expand-sm navbar-dark fixed-top shadow-lg border-1 border-bottom"
+    style="background-color: #9d0bff"
+>
+    <div class="container-fluid">
+        <a class="navbar-brand"
+            ><i class="fa fa-home"></i> R E S E R V A T I O N - C H A M B R E
+        </a>
+
+        <ul class="navbar-nav m-auto">
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="/client"
+                    routerLinkActive="active"
+                    ><i class="fa fa-user"></i> CLIENT</a
+                >
+            </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="/reservation"
+                    routerLinkActive="active"
+                    ><i class="fa fa-pencil"></i> RESERVATION</a
+                >
+            </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="/chambre"
+                    routerLinkActive="active"
+                    ><i class="fa fa-home"></i> CHAMBRE</a
+                >
+            </li>
+        </ul>
+
+        <form class="d-flex">
+            <input
+                role="search"
+                class="form-control me-2"
+                type="text"
+                [(ngModel)]="searchText"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Recherche"
+            />
+            <button class="btn btn-dark" type="button">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+
+        <button
+            class="btn btn-outline-dark btn-lg text-light ms-4"
+            (click)="confirm_deconnect()"
+        >
+            Se deconnecter
+        </button>
+    </div>
+</nav>
+
+<!-- CONTENUE -->
+<div class="container content-page">
+    <div class="row" style="padding-top: 140px">
+        <div class="col-5">
+            <form class="form p-4 mt-5">
+                <h3 class="text-light" style="margin-left: 120px">
+                    C l i e n t
+                </h3>
+                <div class="form-floating mb-2">
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        placeholder="Nom"
+                        [(ngModel)]="nom"
+                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="regexNom(nom)"
+                        (keyup)="lenNom(nom)"
+                        (keyup)="isComplete()"
+                    />
+                    <label class="form-label text-dark">Nom</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        placeholder="Prénoms"
+                        [(ngModel)]="prenom"
+                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="regexPrenom(prenom)"
+                        (keyup)="lenPrenom(prenom)"
+                        (keyup)="isComplete()"
+                    />
+                    <label class="form-label text-dark">Prénoms</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        placeholder="Adresse"
+                        [(ngModel)]="adresse"
+                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="lenAdresse(adresse)"
+                        (keyup)="isComplete()"
+                    />
+                    <label class="form-label text-dark">Adresse</label>
+                </div>
+                <div class="form-floating mb-4">
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        placeholder="Télephone"
+                        [(ngModel)]="tel"
+                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="regxTel(tel)"
+                        (keyup)="lenTel(tel)"
+                        (keyup)="isComplete()"
+                    />
+                    <label class="form-label text-dark">Télephone</label>
+                </div>
+                <button
+                    class="btn btn-sm btn-success ms-2"
+                    [disabled]="!isCompleted"
+                    (click)="createClient()"
+                >
+                    AJOUTER
+                </button>
+                <button
+                    class="btn btn-sm btn-warning ms-2"
+                    [disabled]="!isCompleted"
+                    (click)="updateClient()"
+                >
+                    MODIFIER
+                </button>
+                <button
+                    class="btn btn-sm btn-danger ms-2"
+                    [disabled]="!isCompleted"
+                    (click)="deleteClient()"
+                >
+                    SUPPRIMER
+                </button>
+                <button
+                    class="btn btn-sm btn-dark ms-2"
+                    (click)="clearChamps()"
+                >
+                    ANNULER
+                </button>
+            </form>
+        </div>
+        <div class="col">
+            <h2 class="text-light text-center">Liste des tous les clients</h2>
+
+            <div class="table table-responsive" style="height: 300px">
+                <table class="table table-striped table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">N ° C l i e n t</th>
+                            <th scope="col">N o m et Prénoms</th>
+                            <th scope="col">A d r e s s e</th>
+                            <th scope="col">P h o n e</th>
+                            <th scope="col">A C T I O N</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="
+                                let client of tableClient
+                                    | filterClient : searchText
+                            "
+                        >
+                            <td class="fw-bold">{{ client.numCli }}</td>
+                            <td>{{ client.nom + " " + client.prenom }}</td>
+                            <td>{{ client.adresse }}</td>
+                            <td>{{ client.tel }}</td>
+                            <td>
+                                <button
+                                    class="btn btn-sm btn-dark"
+                                    (click)="prepareACTION(client)"
+                                >
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

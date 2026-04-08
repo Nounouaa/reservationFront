@@ -1,0 +1,254 @@
+<!-- NAVIGATION -->
+<nav
+    class="navbar navbar-expand-sm navbar-dark fixed-top shadow-lg border-1 border-bottom mb-5"
+    style="background-color: #9d0bff"
+>
+    <div class="container-fluid">
+        <a class="navbar-brand"
+            ><i class="fa fa-home"></i> R E S E R V A T I O N - C H A M B R E
+        </a>
+
+        <ul class="navbar-nav m-auto">
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="/client"
+                    routerLinkActive="active"
+                    ><i class="fa fa-user"></i> CLIENT</a
+                >
+            </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="/reservation"
+                    routerLinkActive="active"
+                    ><i class="fa fa-pencil"></i> RESERVATION</a
+                >
+            </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="/chambre"
+                    routerLinkActive="active"
+                    ><i class="fa fa-home"></i> CHAMBRE</a
+                >
+            </li>
+        </ul>
+        <!-- MODAL DE RESERVATION -->
+
+        <form class="d-flex">
+            <input
+                role="search"
+                class="form-control me-2"
+                type="text"
+                [(ngModel)]="searchText"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Recherche"
+            />
+            <button class="btn btn-dark" type="button">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+        <button
+            class="btn btn-outline-dark btn-lg text-light ms-4"
+            (click)="confirm_deconnect()"
+        >
+            Se deconnecter
+        </button>
+    </div>
+</nav>
+
+<div class="container" style="margin-top: 5%">
+    <form class="form mx-auto bg-light p-5 mb-4" style="width: 500px">
+        <!-- <div class="form-group">
+            <label for="image" class="form-label">Importer une photo</label>
+            <input
+                type="file"
+                class="form-control"
+                id="image"
+                placeholder="Importer une photo"
+                (change)="onFileSelected($event)"
+            />
+        </div> -->
+        <div class="form-group">
+            <label for="type_c" class="form-label">Type</label>
+            <select
+                class="form-select"
+                id="type_c"
+                placeholder="Type"
+                [(ngModel)]="typeC"
+                [ngModelOptions]="{ standalone: true }"
+            >
+                <option value="Simple">Simple</option>
+                <option value="Double">Double</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="nbreLit" class="form-label">Nombre de lit(s)</label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="nbreLit"
+                placeholder="Nombre de lit(s)"
+                [(ngModel)]="nbreLit"
+                (keyup)="lenNbLit(nbreLit)"
+                (keyup)="regxNbLit(nbreLit)"
+                (keyup)="isComplete()"
+                [ngModelOptions]="{ standalone: true }"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="prix" class="form-label">Prix (24h)</label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="prix"
+                placeholder="Prix"
+                [(ngModel)]="prix"
+                (keyup)="lenNbPrix(prix)"
+                (keyup)="regxPrix(prix)"
+                (keyup)="isComplete()"
+                [ngModelOptions]="{ standalone: true }"
+            />
+        </div>
+
+        <button
+            class="btn btn-primary mt-4 mx-4"
+            (click)="create()"
+            [disabled]="!isCompleted"
+        >
+            Créer
+        </button>
+    </form>
+
+    <div class="row">
+        <div
+            class="col-sm-6 col-md-4 col-lg-3 mb-4"
+            *ngFor="let chambre of arrayChambre | filterPersonnel : searchText"
+        >
+            <div class="card h-100 shadow-lg">
+                <!-- <img class="card-img-top" alt="Chambre d'hôtel" /> -->
+                <div class="card-body p-2">
+                    <h5 class="card-title">
+                        Chambre n° {{ chambre.numChambre }}
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        Chambre simple avec {{ chambre.nbreLit }} lit(s)
+                    </h6>
+                    <p class="card-text">Prix : {{ chambre.prix }} ARIARY</p>
+                    <p>
+                        <span class="text-success fs-bold">Status</span> :
+                        {{ chambre.statusC }}
+                    </p>
+                </div>
+
+                <button
+                    *ngIf="chambre.statusC === 'disponible'"
+                    class="btn btn-sm btn-success"
+                    (click)="reserver(chambre.numChambre)"
+                >
+                    Réserver
+                </button>
+                <button
+                    *ngIf="chambre.statusC === 'occupée'"
+                    class="btn btn-sm btn-danger"
+                    disabled
+                >
+                    Occupée
+                </button>
+                <button
+                    class="btn btn-sm btn-dark"
+                    (click)="liberer(chambre.numChambre)"
+                >
+                    liberer
+                </button>
+            </div>
+        </div>
+    </div>
+    <form
+        class="form mx-auto bg-light p-5 mb-4 z-3"
+        style="width: 500px"
+        id="form-reservation"
+    >
+        <h4>Formulaire de réservation</h4>
+        <div class="form-group">
+            <label for="numCli" class="form-label">N°Client</label>
+            <input
+                type="text"
+                class="form-control"
+                id="numCli"
+                placeholder="Numéro du client"
+                [(ngModel)]="numCli"
+                (keyup)="lenNumCli(numCli)"
+                (keyup)="regxNumCli(numCli)"
+                (keyup)="verifyIm()"
+                [ngModelOptions]="{ standalone: true }"
+            />
+        </div>
+        <p class="text-danger" *ngIf="isInscrit === false">N° introuvable</p>
+        <p class="text-success" *ngIf="isInscrit === true">N°vérifié</p>
+        <div class="form-group">
+            <label for="numChambre" class="form-label">Numéro Chambre</label>
+            <input
+                type="text"
+                class="form-control"
+                id="Numéro chambre"
+                placeholder="Numéro chambre"
+                [(ngModel)]="numChambre"
+                (keyup)="lenNumChambre(numChambre)"
+                (keyup)="regxNumChambre(numChambre)"
+                [ngModelOptions]="{ standalone: true }"
+                disabled="true"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="dateReservation" class="form-label"
+                >Date de réservation</label
+            >
+
+            <input
+                type="date"
+                class="form-control"
+                id="dateReservation"
+                placeholder="Date de réservation"
+                [(ngModel)]="dateRes"
+                [ngModelOptions]="{ standalone: true }"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="dateDebut" class="form-label">Date de début</label>
+
+            <input
+                type="date"
+                class="form-control"
+                id="dateDebut"
+                placeholder="Date de début"
+                [(ngModel)]="dateDeb"
+                [ngModelOptions]="{ standalone: true }"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="dateFin" class="form-label">Date de fin</label>
+
+            <input
+                type="date"
+                class="form-control"
+                id="dateFin"
+                placeholder="Date de fin"
+                [(ngModel)]="dateFin"
+                [ngModelOptions]="{ standalone: true }"
+            />
+        </div>
+
+        <button class="btn btn-primary d-grid mt-4" (click)="valider()">
+            Valider
+        </button>
+    </form>
+</div>
