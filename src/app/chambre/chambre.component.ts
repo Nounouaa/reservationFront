@@ -29,9 +29,9 @@ export class ChambreComponent {
     dateDeb: string = "";
     dateFin: string = "";
 
-    apiURL = "https://reservationchambre-production.up.railway.app/reservation/chambre";
-    apiURL2 = "https://reservationchambre-production.up.railway.app/reservation/reservation";
-    apiClient = "https://reservationchambre-production.up.railway.app/reservation/client";
+    apiURL = "https://reservationchambre-production.up.railway.app/chambre";
+    apiURL2 = "https://reservationchambre-production.up.railway.app/reservation";
+    apiClient = "https://reservationchambre-production.up.railway.app/client";
 
     tableClient: any = [];
 

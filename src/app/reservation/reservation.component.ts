@@ -17,7 +17,7 @@ export class ReservationComponent {
     searchText!: string;
     tableReservation!: [];
     apiURL = "https://reservationchambre-production.up.railway.app/reservation";
-    apiURL2 = "https://reservationchambre-production.up.railway.app/reservation/client/getReservationByClient";
+    apiURL2 = "https://reservationchambre-production.up.railway.app/client/getReservationByClient";
 
    getPdf(text: any) {
     this.http.get(`${this.apiURL2}/` + text).subscribe((data: any) => {
