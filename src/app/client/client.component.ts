@@ -17,8 +17,8 @@ export class ClientComponent implements OnInit {
     adresse: string = "";
     tel: string = "";
 
-    apiURL = "https://reservationchambre-production.up.railway.app/reservation/client";
-    apiCommande = "https://reservationchambre-production.up.railway.app/reservation/commande/delete";
+    apiURL = "https://reservationchambre-production.up.railway.app/client";
+    apiCommande = "http://localhost:8081/client";
 
     id_selected: string = "";
 
