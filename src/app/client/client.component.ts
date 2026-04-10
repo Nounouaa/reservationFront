@@ -247,4 +247,14 @@ export class ClientComponent implements OnInit {
         this.authService.signOut();
         this.router.navigate(["/"]);
     }
+
+    menuOpen: boolean = false;
+
+toggleMenu() {
+  this.menuOpen = !this.menuOpen;
+}
+
+closeMenu() {
+  this.menuOpen = false;
+}
 }

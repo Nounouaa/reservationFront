@@ -104,10 +104,19 @@ export class ChambreComponent {
         });
     }
 
-    reserver(text: string) {
-        this.numChambre = text;
-    }
+   reserver(text: string) {
+    this.numChambre = text;
 
+    setTimeout(() => {
+        const element = document.getElementById("reservationForm");
+        if (element) {
+            element.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    }, 100);
+}
     liberer(text: string) {
         this.numChambre = text;
         this.http
@@ -118,49 +127,45 @@ export class ChambreComponent {
     }
 
     valider() {
-        if (
-            !(
-                this.numCli !== "" &&
-                this.dateDeb !== "" &&
-                this.dateFin !== "" &&
-                this.dateRes !== "" &&
-                this.numChambre !== "" &&
-                this.isInscrit !== false
-            )
-        ) {
+
+    if (
+        !this.numCli ||
+        !this.dateDeb ||
+        !this.dateFin ||
+        !this.numChambre ||
+        this.isInscrit === false
+    ) {
+        Swal.fire({
+            icon: "error",
+            title: "Erreur",
+            text: "Veuillez remplir tous les champs correctement",
+            timer: 1500,
+            showConfirmButton: false,
+        });
+        return;
+    }
+
+    const reservation = {
+        numCli: this.numCli,
+        numChambre: this.numChambre,
+        dateDeb: this.dateDeb,
+        dateFin: this.dateFin
+    };
+
+    this.http.post(`${this.apiURL2}/create/${this.numChambre}`, reservation)
+        .subscribe(() => {
             Swal.fire({
-                icon: "error",
-                title: "Erreur",
-                text: "veuillez renseigner tous le(s) champ(s)",
+                icon: "success",
+                title: "Effectuée!",
+                text: "Réservation effectuée",
                 timer: 1500,
                 showConfirmButton: false,
             });
-        } else {
-            const reservation = {
-                numCli: this.numCli,
-                numChambre: this.numChambre,
-                dateDeb: this.dateDeb,
-                dateFin: this.dateFin,
-                dateRes: this.dateRes,
-            };
 
-            const numChambre = this.numChambre;
-
-            this.http
-                .post(`${this.apiURL2}/create/${numChambre}`, reservation)
-                .subscribe((data: any) => {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Effectuée!",
-                        text: "Reservation effectuée",
-                        timer: 1500,
-                        showConfirmButton: false,
-                    });
-                    this.read();
-                    this.router.navigate(["/reservation"]);
-                });
-        }
-    }
+            this.read();
+            this.router.navigate(["/reservation"]);
+        });
+}
 
     update() {}
 

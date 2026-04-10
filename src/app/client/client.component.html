@@ -1,133 +1,78 @@
 <!-- NAVIGATION -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-lg"
-     style="background-color: #9d0bff">
+<app-navbar></app-navbar>
 
-    <div class="container-fluid">
-
-        <a class="navbar-brand">
-            <i class="fa fa-home"></i>
-            RESERVATION - CHAMBRE
-        </a>
-
-        <!-- bouton mobile -->
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse" data-bs-target="#navbarMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarMenu">
-
-            <ul class="navbar-nav m-auto">
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/client">CLIENT</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/reservation">RESERVATION</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/chambre">CHAMBRE</a>
-                </li>
-            </ul>
-
-            <form class="d-flex mt-2 mt-lg-0">
-                <input class="form-control me-2"
-                       type="text"
-                       placeholder="Recherche"
-                       [(ngModel)]="searchText"
-                       [ngModelOptions]="{ standalone: true }">
-
-                <button class="btn btn-dark">
-                    <i class="fa fa-search"></i>
-                </button>
-            </form>
-
-            <button class="btn btn-outline-dark text-light ms-lg-4 mt-2 mt-lg-0"
-                    (click)="confirm_deconnect()">
-                Se déconnecter
-            </button>
-
-        </div>
-    </div>
-</nav>
-<!-- CONTENUE -->
+<!-- CONTENU -->
 <div class="container content-page">
-
-    <div class="row g-4" style="padding-top: 120px;">
+    <div class="row pt-5 mt-5">
 
         <!-- FORMULAIRE -->
-        <div class="col-12 col-md-5">
+        <div class="col-12 col-md-5 mb-4">
+            <form class="form p-4 mt-3">
 
-            <form class="form p-4">
-
-                <h3 class="text-center text-light mb-3">CLIENT</h3>
+                <h3 class="text-light text-center mb-3">
+                    Client
+                </h3>
 
                 <div class="form-floating mb-2">
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Nom"
-                           [(ngModel)]="nom"
-                           [ngModelOptions]="{ standalone: true }"
-                           (keyup)="regexNom(nom); lenNom(nom); isComplete()">
-                    <label>Nom</label>
+                    <input type="text" class="form-control form-control-sm"
+                        placeholder="Nom"
+                        [(ngModel)]="nom"
+                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="regexNom(nom); lenNom(nom); isComplete()" />
+                    <label class="text-dark">Nom</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Prénoms"
-                           [(ngModel)]="prenom"
-                           [ngModelOptions]="{ standalone: true }"
-                           (keyup)="regexPrenom(prenom); lenPrenom(prenom); isComplete()">
-                    <label>Prénoms</label>
+                    <input type="text" class="form-control form-control-sm"
+                        placeholder="Prénoms"
+                        [(ngModel)]="prenom"
+                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="regexPrenom(prenom); lenPrenom(prenom); isComplete()" />
+                    <label class="text-dark">Prénoms</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Adresse"
-                           [(ngModel)]="adresse"
-                           [ngModelOptions]="{ standalone: true }"
-                           (keyup)="lenAdresse(adresse); isComplete()">
-                    <label>Adresse</label>
+                    <input type="text" class="form-control form-control-sm"
+                        placeholder="Adresse"
+                        [(ngModel)]="adresse"
+                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="lenAdresse(adresse); isComplete()" />
+                    <label class="text-dark">Adresse</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Téléphone"
-                           [(ngModel)]="tel"
-                           [ngModelOptions]="{ standalone: true }"
-                           (keyup)="regxTel(tel); lenTel(tel); isComplete()">
-                    <label>Téléphone</label>
+                    <input type="text" class="form-control form-control-sm"
+                        placeholder="Téléphone"
+                        [(ngModel)]="tel"
+                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="regxTel(tel); lenTel(tel); isComplete()" />
+                    <label class="text-dark">Téléphone</label>
                 </div>
 
-                <div class="d-flex flex-wrap gap-2">
-
+                <!-- BOUTONS -->
+                <div class="d-flex flex-wrap justify-content-center gap-2">
                     <button class="btn btn-success btn-sm"
-                            [disabled]="!isCompleted"
-                            (click)="createClient()">
+                        [disabled]="!isCompleted"
+                        (click)="createClient()">
                         AJOUTER
                     </button>
 
                     <button class="btn btn-warning btn-sm"
-                            [disabled]="!isCompleted"
-                            (click)="updateClient()">
+                        [disabled]="!isCompleted"
+                        (click)="updateClient()">
                         MODIFIER
                     </button>
 
                     <button class="btn btn-danger btn-sm"
-                            [disabled]="!isCompleted"
-                            (click)="deleteClient()">
+                        [disabled]="!isCompleted"
+                        (click)="deleteClient()">
                         SUPPRIMER
                     </button>
 
                     <button class="btn btn-dark btn-sm"
-                            (click)="clearChamps()">
+                        (click)="clearChamps()">
                         ANNULER
                     </button>
-
                 </div>
 
             </form>
@@ -136,45 +81,41 @@
         <!-- TABLE -->
         <div class="col-12 col-md-7">
 
-            <h2 class="text-center text-light mb-3">
+            <h2 class="text-light text-center mb-3">
                 Liste des clients
             </h2>
 
             <div class="table-responsive table-container">
-
                 <table class="table table-striped table-bordered text-center">
 
                     <thead>
                         <tr>
-                            <th>Client</th>
-                            <th>Nom & Prénoms</th>
+                            <th>N° Client</th>
+                            <th>Nom et Prénoms</th>
                             <th>Adresse</th>
                             <th>Téléphone</th>
-                            <th class="col-action">ACTION</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let client of tableClient | filterClient: searchText">
-
-                            <td>{{ client.numCli }}</td>
-                            <td>{{ client.nom }} {{ client.prenom }}</td>
+                        <tr *ngFor="let client of tableClient | filterClient : searchText">
+                            <td class="fw-bold">{{ client.numCli }}</td>
+                            <td>{{ client.nom + ' ' + client.prenom }}</td>
                             <td>{{ client.adresse }}</td>
                             <td>{{ client.tel }}</td>
-
-                            <td class="col-action">
-                                <button class="btn btn-dark btn-sm"
-                                        (click)="prepareACTION(client)">
-                                    <i class="fa fa-edit"></i>
+                            <td>
+                                <button class="btn btn-sm btn-dark"
+                                    (click)="prepareACTION(client)">
+                                    <i class="fa fa-pencil-square-o"></i>
                                 </button>
                             </td>
-
                         </tr>
                     </tbody>
 
                 </table>
-
             </div>
+
         </div>
 
     </div>

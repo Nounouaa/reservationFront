@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-lg border-bottom"
+    style="background-color: #9d0bff">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand">
+            <i class="fa fa-home me-2"></i> RESERVATION
+        </a>
+
+        <!-- BOUTON BURGER -->
+        <button class="navbar-toggler" type="button" (click)="toggleMenu()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- MENU -->
+        <div class="collapse navbar-collapse"
+            [ngClass]="{ 'show': menuOpen }">
+
+            <ul class="navbar-nav m-auto text-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/client" (click)="closeMenu()">
+                        <i class="fa fa-user me-2"></i> CLIENT
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/reservation" (click)="closeMenu()">
+                        <i class="fa fa-pencil me-2"></i> RESERVATION
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/chambre" (click)="closeMenu()">
+                        <i class="fa fa-bed me-2"></i> CHAMBRE
+                    </a>
+                </li>
+
+            </ul>
+
+            <form class="d-flex my-2 my-lg-0">
+                <input class="form-control me-2"
+                    [(ngModel)]="searchText"
+                    [ngModelOptions]="{ standalone: true }"
+                    placeholder="Recherche">
+            </form>
+
+            <button class="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0"
+                (click)="confirm_deconnect()">
+                <i class="fa fa-sign-out me-2"></i> Déconnexion
+            </button>
+
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,16 @@
+.nav-link i {
+    transition: 0.3s;
+}
+
+.nav-link:hover i {
+    transform: scale(1.2);
+    color: #ffd700;
+}
+
+.navbar-brand i {
+    color: #ffd700;
+}
+
+.navbar-collapse {
+    transition: all 0.3s ease-in-out;
+}

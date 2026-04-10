@@ -1,0 +1,38 @@
+.content-page {
+    padding-top: 90px;
+}
+
+/* TABLE SCROLL */
+.table-container {
+    max-height: 400px;
+    overflow: auto;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    h2 {
+        font-size: 18px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 6px !important;
+        white-space: nowrap;
+    }
+
+    .btn {
+        font-size: 12px;
+        padding: 5px;
+    }
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+    .table {
+        font-size: 13px;
+    }
+}

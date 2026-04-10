@@ -17,6 +17,7 @@ import { FilterClientPipe } from "./filter-client.pipe";
 import { ReservationComponent } from "./reservation/reservation.component";
 import { ChambreComponent } from "./chambre/chambre.component";
 import { Routes } from '@angular/router';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
         FilterClientPipe,
         ReservationComponent,
         ChambreComponent,
+        NavbarComponent,
     ],
     imports: [
         BrowserModule,
@@ -64,6 +66,7 @@ const routes: Routes = [
         RouterModule.forRoot(routes),
         NgxChartsModule,
         BrowserAnimationsModule,
+        FormsModule
     ],
     providers: [AuthService, AuthGuard],
     bootstrap: [AppComponent],
