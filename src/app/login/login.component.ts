@@ -18,29 +18,45 @@ export class LoginComponent {
         this.etat = false;
     }
 
-    onSignIn() {
-        if (
-            (this.userName.toLowerCase() == "admin" ||
-                this.userName == "admin@gmail.com") &&
-            this.password === "admin"
-        ) {
-            this.authService.signIn().then(() => {
-                this.etat = this.authService.isAuth;
-                this.router.navigate(["/client"]);
-                this.userName = "";
-                this.password = "";
-            });
-            this.erroText = "";
-        } else {
-            this.userName = "";
-            this.password = "";
-            this.erroText = "Nom d'utilisateur ou mot de passe incorrecte";
-        }
-    }
+  onSignIn() {
 
-    onSignOut() {
-        this.erroText = "";
-        this.authService.signOut();
-        this.etat = this.authService.isAuth;
-    }
+  const username = this.userName.toLowerCase();
+  const password = this.password;
+
+  if (
+    (username === "admin" || username === "admin@gmail.com") &&
+    password === "admin"
+  ) {
+
+    this.authService.signIn(username, password).then(() => {
+
+      this.etat = this.authService.isAuthenticated();
+
+      this.router.navigate(["/client"]);
+
+      this.userName = "";
+      this.password = "";
+      this.erroText = "";
+
+    });
+
+  } else {
+
+    this.userName = "";
+    this.password = "";
+    this.erroText = "Nom d'utilisateur ou mot de passe incorrect";
+
+  }
+}
+
+onSignOut() {
+
+  this.authService.signOut();
+
+  this.etat = this.authService.isAuthenticated();
+
+  this.erroText = "";
+
+  this.router.navigate(["/login"]);
+}
 }

@@ -16,18 +16,34 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FilterClientPipe } from "./filter-client.pipe";
 import { ReservationComponent } from "./reservation/reservation.component";
 import { ChambreComponent } from "./chambre/chambre.component";
+import { Routes } from '@angular/router';
 
-const routes = [
-    { path: "", component: LoginComponent },
-    { path: "accueil", component: HomeComponent },
-    { path: "chambre", component: ChambreComponent },
-    { path: "client", component: ClientComponent },
-    {
-        path: "reservation",
 
-        component: ReservationComponent,
-    },
+const routes: Routes = [
+  { path: "", redirectTo: "login", pathMatch: "full" },
+
+  { path: "login", component: LoginComponent },
+
+  // 🔐 routes protégées
+  {
+    path: "client",
+    component: ClientComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "chambre",
+    component: ChambreComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "reservation",
+    component: ReservationComponent,
+    canActivate: [AuthGuard]
+  },
+
+  { path: "**", redirectTo: "login" }
 ];
+
 
 @NgModule({
     declarations: [

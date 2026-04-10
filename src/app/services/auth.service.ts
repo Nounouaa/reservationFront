@@ -1,18 +1,29 @@
 export class AuthService {
-    isAuth: boolean = false;
 
-    constructor() {}
+  constructor() {}
 
-    signIn() {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                this.isAuth = true;
-                resolve(true);
-            }, 2000);
-        });
-    }
+  signIn(username: string, password: string): Promise<boolean> {
+    return new Promise((resolve) => {
 
-    signOut() {
-        this.isAuth = false;
-    }
+      setTimeout(() => {
+
+        // simulation d’une connexion réussie
+        const token = "fake-token-123";
+
+        // sauvegarde du token
+        localStorage.setItem("token", token);
+
+        resolve(true);
+      }, 1000);
+
+    });
+  }
+
+  signOut(): void {
+    localStorage.removeItem("token");
+  }
+
+  isAuthenticated(): boolean {
+    return localStorage.getItem("token") !== null;
+  }
 }
