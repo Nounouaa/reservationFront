@@ -1,8 +1,50 @@
 .form {
-    width: 400px;
+    width: 100%;
+    max-width: 420px;
+    margin: auto;
+
     backdrop-filter: blur(5px) saturate(200%);
     -webkit-backdrop-filter: blur(5px) saturate(200%);
+
     background-color: rgba(255, 255, 255, 0.21);
     border-radius: 12px;
     border: 1px solid rgba(209, 213, 219, 0.3);
+}
+
+.table-container {
+    max-height: 350px;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+/* colonne action FIXE */
+.col-action {
+    width: 60px;
+    text-align: center;
+}
+
+/* MOBILE OPTIMISÉ */
+@media (max-width: 768px) {
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 6px !important;
+        white-space: nowrap;
+    }
+
+    .btn {
+        padding: 4px 6px;
+        font-size: 12px;
+    }
+
+    .form {
+        max-width: 100%;
+    }
+
+    .content-page {
+        padding: 10px;
+    }
 }
