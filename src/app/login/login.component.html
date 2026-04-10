@@ -1,33 +1,40 @@
-<div class="container-login d-flex align-items-center py-4 vh-100">
-    <form
-        autocomplete="off"
-        class="form-login w-100 border-0 shadow-lg border border-5"
-    >
-        <h1 class="h3 mb-3 fw-normal text-center text-light">L O G I N</h1>
-        <input
-            type="text"
-            class="form-control mb-4 bg-light"
-            id="userName"
-            placeholder="Nom d'utilisateur"
-            [(ngModel)]="userName"
-            [ngModelOptions]="{ standalone: true }"
-        />
-        <input
-            type="password"
-            class="form-control mb-4 bg-light"
-            id="password"
-            placeholder="Mot de passe"
-            [(ngModel)]="password"
-            [ngModelOptions]="{ standalone: true }"
-        />
-        <p class="text-danger">{{ erroText }}</p>
+<div class="container-login">
+  <form
+    autocomplete="off"
+    class="form-login shadow-lg"
+  >
+    <h1 class="h3 mb-4 fw-bold text-center text-light">
+      LOGIN
+    </h1>
 
-        <button
-            class="btn btn-connexion w-100 text-light py-2"
-            type="button"
-            (click)="onSignIn()"
-        >
-            Se connecter
-        </button>
-    </form>
+    <input
+      type="text"
+      class="form-control mb-3"
+      id="userName"
+      placeholder="Nom d'utilisateur"
+      [(ngModel)]="userName"
+      [ngModelOptions]="{ standalone: true }"
+    />
+
+    <input
+      type="password"
+      class="form-control mb-3"
+      id="password"
+      placeholder="Mot de passe"
+      [(ngModel)]="password"
+      [ngModelOptions]="{ standalone: true }"
+    />
+
+    <p class="text-danger small">
+      {{ erroText }}
+    </p>
+
+    <button
+      class="btn btn-connexion w-100 py-2 text-white"
+      type="button"
+      (click)="onSignIn()"
+    >
+      Se connecter
+    </button>
+  </form>
 </div>
